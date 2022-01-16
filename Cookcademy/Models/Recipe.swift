@@ -8,37 +8,47 @@
 import Foundation
 
 struct Recipe: Identifiable {
-    var id = UUID()
-    
-    var mainInformation: MainInformation
-    var ingredients: [Ingredient]
-    var directions: [Direction]
-    
-    init(mainInformation: MainInformation, ingredients:[Ingredient], directions:[Direction]) {
-        self.mainInformation = mainInformation
-        self.ingredients = ingredients
-        self.directions = directions
-      }
-     
-      init() {
-        self.init(mainInformation: MainInformation(name: "", description: "", author: "", category: .breakfast),
-                  ingredients: [],
-                  directions: [])
-      }
+  var id = UUID()
+  
+  var mainInformation: MainInformation
+  var ingredients: [Ingredient]
+  var directions: [Direction]
+  
+  init(mainInformation: MainInformation, ingredients:[Ingredient], directions:[Direction]) {
+      self.mainInformation = mainInformation
+      self.ingredients = ingredients
+      self.directions = directions
+    }
+   
+    init() {
+      self.init(mainInformation: MainInformation(name: "", description: "", author: "", category: .breakfast),
+                ingredients: [],
+                directions: [])
+    }
+  
+  var isValid: Bool {
+      mainInformation.isValid && !ingredients.isEmpty && !directions.isEmpty
+  }
+
 }
  
 struct MainInformation {
-    var name: String
-    var description: String
-    var author: String
-    var category: Category
+  var name: String
+  var description: String
+  var author: String
+  var category: Category
 
-    enum Category: String, CaseIterable {
-        case breakfast = "Breakfast"
-        case lunch = "Lunch"
-        case dinner = "Dinner"
-        case dessert = "Dessert"
-    }
+  enum Category: String, CaseIterable {
+      case breakfast = "Breakfast"
+      case lunch = "Lunch"
+      case dinner = "Dinner"
+      case dessert = "Dessert"
+  }
+  
+  var isValid: Bool {
+      !name.isEmpty && !description.isEmpty && !author.isEmpty
+  }
+
 }
 
 struct Ingredient {
