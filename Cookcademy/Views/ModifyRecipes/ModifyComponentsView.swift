@@ -80,8 +80,6 @@ struct ModifyComponentsView<Component: RecipeComponent, DestinationView: ModifyC
             .listRowBackground(listBackgroundColor)
         }
         .foregroundColor(listTextColor)
-
-
       }
     }
   }
