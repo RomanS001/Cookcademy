@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct RecipesListView: View {
-    @EnvironmentObject private var recipeData: RecipeData
-    let category: MainInformation.Category
-    
+  @EnvironmentObject private var recipeData: RecipeData
+  let viewStyle: ViewStyle
+  // let category: MainInformation.Category
+
     @State private var isPresenting = false
     @State private var newRecipe = Recipe()
 
@@ -30,7 +31,8 @@ struct RecipesListView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
                     newRecipe = Recipe()
-                    newRecipe.mainInformation.category = recipes[0].mainInformation.category
+                  // newRecipe.mainInformation.category = recipes[0].mainInformation.category
+                  newRecipe.mainInformation.category = recipes.first?.mainInformation.category ?? .breakfast
                     isPresenting = true
                 }, label: {
                     Image(systemName: "plus")
@@ -49,6 +51,9 @@ struct RecipesListView: View {
                       ToolbarItem(placement: .confirmationAction) {
                         if newRecipe.isValid {
                           Button("Add") {
+                            if case .favorites = viewStyle {
+                              newRecipe.isFavorite = true
+                            }
                             recipeData.add(recipe: newRecipe)
                               isPresenting = false
                           }
@@ -63,13 +68,37 @@ struct RecipesListView: View {
 
 
 extension RecipesListView {
+
+  enum ViewStyle {
+    case favorites
+    case singleCategory(MainInformation.Category)
+  }
+
   private var recipes: [Recipe] {
-      recipeData.recipes(for: category)
+    switch viewStyle {
+    case let .singleCategory(category):
+      return recipeData.recipes(for: category)
+    case .favorites:
+      return recipeData.favoriteRecipes
+    }
   }
 
   private var navigationTitle: String {
-      "\(category.rawValue) Recipes"
+    switch viewStyle {
+    case let .singleCategory(category):
+      return "\(category.rawValue) Recipes"
+    case .favorites:
+      return "Favorite Recipes"
+    }
   }
+
+  // private var recipes: [Recipe] {
+  //     recipeData.recipes(for: category)
+  // }
+  //
+  // private var navigationTitle: String {
+  //     "\(category.rawValue) Recipes"
+  // }
 
   func binding(for recipe: Recipe) -> Binding<Recipe> {
     guard let index = recipeData.index(of: recipe) else {
@@ -82,9 +111,9 @@ extension RecipesListView {
 
 
 struct RecipesListView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            RecipesListView(category: .breakfast)
-        }.environmentObject(RecipeData())
-    }
+  static var previews: some View {
+    NavigationView {
+      RecipesListView(viewStyle: .singleCategory(.breakfast))
+    }.environmentObject(RecipeData())
+  }
 }
