@@ -12,7 +12,7 @@ struct ModifyIngredientView: ModifyComponentView {
     @Binding var ingredient: Ingredient
     let createAction: ((Ingredient) -> Void)
     
-    private let listBackgroundColor = AppColor.background
+    @AppStorage("listBackgroundColor") private var listBackgroundColor = AppColor.background
     private let listTextColor = AppColor.foreground
   
   init(component: Binding<Ingredient>, createAction: @escaping (Ingredient) -> Void) {
