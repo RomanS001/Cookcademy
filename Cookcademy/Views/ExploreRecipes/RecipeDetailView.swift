@@ -12,9 +12,10 @@ struct RecipeDetailView: View {
 
   @AppStorage("hideOptionalSteps") private var hideOptionalSteps: Bool = false
   @AppStorage("listBackgroundColor") private var listBackgroundColor = AppColor.background
-  private let listTextColor = AppColor.foreground
-
+  @EnvironmentObject private var recipeData: RecipeData
   @State private var isPresenting = false
+
+  private let listTextColor = AppColor.foreground
  
   var body: some View {
     VStack {
@@ -73,7 +74,7 @@ struct RecipeDetailView: View {
       }
       .sheet(isPresented: $isPresenting) {
         NavigationView {
-        ModifyRecipeView(recipe: $recipe)
+          ModifyRecipeView(recipe: $recipe)
           .toolbar {
             ToolbarItem(placement: .confirmationAction) {
               Button("Save") {
@@ -82,6 +83,9 @@ struct RecipeDetailView: View {
             }
           }
           .navigationTitle("Edit Recipe")
+        }
+        .onDisappear() {
+          recipeData.saveRecipes()
         }
       }
   }
