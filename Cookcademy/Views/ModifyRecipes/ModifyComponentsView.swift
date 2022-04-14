@@ -31,12 +31,12 @@ protocol ModifyComponentView: View {
 
 struct ModifyComponentsView<Component: RecipeComponent, DestinationView: ModifyComponentView>: View where DestinationView.Component == Component {
   @Binding var components: [Component]
- 
+
   @AppStorage("listBackgroundColor") private var listBackgroundColor = AppColor.background
   private let listTextColor = AppColor.foreground
- 
+
   @State private var newComponent = Component()
- 
+
   var body: some View {
     VStack {
       let addComponentView = DestinationView(component: $newComponent) { component in
@@ -67,13 +67,14 @@ struct ModifyComponentsView<Component: RecipeComponent, DestinationView: ModifyC
         //     .listRowBackground(listBackgroundColor)
         // }.foregroundColor(listTextColor)
 
-            let editComponentView = DestinationView(component: $components[index]) { _ in return }
-              .navigationTitle("Edit \(Component.singularName().capitalized)")
-            NavigationLink(component.description, destination: editComponentView)
+          let editComponentView = DestinationView(component: $components[index]) { _ in return }
+          .navigationTitle("Edit \(Component.singularName().capitalized)")
+          NavigationLink(component.description, destination: editComponentView)
           }
           .onDelete { components.remove(atOffsets: $0) }
           .onMove { indices, newOffet in
-            components.move(fromOffsets: indices, toOffset: newOffet) }
+            components.move(fromOffsets: indices, toOffset: newOffet)
+          }
           .listRowBackground(listBackgroundColor)
           NavigationLink("Add another \(Component.singularName())", destination: addComponentView)
             .buttonStyle(PlainButtonStyle())
@@ -88,7 +89,7 @@ struct ModifyComponentsView<Component: RecipeComponent, DestinationView: ModifyC
 
 struct ModifyIngredientsView_Previews: PreviewProvider {
   @State static var recipe = Recipe.testRecipes[1]
-  @State static var emptyIngredients = [Ingredient]()
+  @State static var emptyIngredients: [Ingredient] = []
   static var previews: some View {
     NavigationView {
       ModifyComponentsView<Ingredient, ModifyIngredientView>(components: $recipe.ingredients)

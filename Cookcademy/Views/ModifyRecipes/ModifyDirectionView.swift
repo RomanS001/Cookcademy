@@ -6,21 +6,21 @@
 //
 
 import SwiftUI
- 
+
 struct ModifyDirectionView: ModifyComponentView {
   @Binding var direction: Direction
   let createAction: (Direction) -> Void
-  
+
   init(component: Binding<Direction>, createAction: @escaping (Direction) -> Void) {
-      self._direction = component
-      self.createAction = createAction
-    }
- 
+    self._direction = component
+    self.createAction = createAction
+  }
+
   @AppStorage("listBackgroundColor") private var listBackgroundColor = AppColor.background
   private let listTextColor = AppColor.foreground
- 
+
   @Environment(\.presentationMode) private var mode
- 
+
   var body: some View {
     Form {
       TextField("Direction Description", text: $direction.description)
@@ -39,7 +39,7 @@ struct ModifyDirectionView: ModifyComponentView {
     .foregroundColor(listTextColor)
   }
 }
- 
+
 struct ModifyDirectionView_Previews: PreviewProvider {
   @State static var emptyDirection = Direction(description: "", isOptional: false)
   static var previews: some View {

@@ -12,7 +12,7 @@ struct ModifyMainInformationView: View {
   private let listTextColor = AppColor.foreground
   
   @Binding var mainInformation: MainInformation
- 
+
   var body: some View {
     Form {
       TextField("Recipe Name", text: $mainInformation.name)
@@ -23,26 +23,31 @@ struct ModifyMainInformationView: View {
         TextEditor(text: $mainInformation.description)
           .listRowBackground(listBackgroundColor)
       }
-      Picker(selection: $mainInformation.category, label:
-              HStack {
-                Text("Category")
-                Spacer()
-                Text(mainInformation.category.rawValue)
-              }) {
-                ForEach(MainInformation.Category.allCases,
-                id: \.self) { category in
-                  Text(category.rawValue)
-                }
-              }
-              .listRowBackground(listBackgroundColor)
-              .pickerStyle(MenuPickerStyle())
+      Picker(
+        selection: $mainInformation.category,
+        label: HStack {
+          Text("Category")
+          Spacer()
+          Text(mainInformation.category.rawValue)
+        }) {
+          ForEach(
+            MainInformation.Category.allCases, id: \.self) { category in
+              Text(category.rawValue)
+            }
+        }
+        .listRowBackground(listBackgroundColor)
+        .pickerStyle(MenuPickerStyle())
     }
     .foregroundColor(listTextColor)
   }
 }
 
 struct ModifyMainInformationView_Previews: PreviewProvider {
-  @State static var mainInformation = MainInformation(name: "TestName", description: "TestDescription", author: "TestAutor", category: MainInformation.Category.lunch)
+  @State static var mainInformation = MainInformation(
+    name: "TestName",
+    description: "TestDescription",
+    author: "TestAutor",
+    category: MainInformation.Category.lunch)
     static var previews: some View {
       ModifyMainInformationView(mainInformation: $mainInformation)
     }

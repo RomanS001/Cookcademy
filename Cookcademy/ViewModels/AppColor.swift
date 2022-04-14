@@ -5,20 +5,24 @@
 //  Created by Roman on 15.01.2022.
 //
 
-//import Foundation
+// import Foundation
 import SwiftUI
- 
+
 struct AppColor {
-  static let background: Color = Color(.sRGB,
-                                       red: 228/255,
-                                       green: 235/255,
-                                       blue: 250/255,
-                                       opacity: 1)
-  static let foreground: Color = Color(.sRGB,
-                                       red: 118/255,
-                                       green: 119/255,
-                                       blue: 231/255,
-                                       opacity: 1)
+  static let background = Color(
+    .sRGB,
+    red: 228 / 255,
+    green: 235 / 255,
+    blue: 250 / 255,
+    opacity: 1
+  )
+  static let foreground = Color(
+    .sRGB,
+    red: 118 / 255,
+    green: 119 / 255,
+    blue: 231 / 255,
+    opacity: 1
+  )
 }
 
 extension Color: RawRepresentable {
@@ -26,12 +30,13 @@ extension Color: RawRepresentable {
     do {
       let encodedData = rawValue.data(using: .utf8)!
       let components = try JSONDecoder().decode([Double].self, from: encodedData)
-      self = Color(red: components[0],
-                   green: components[1],
-                   blue: components[2],
-                   opacity: components[3])
-    }
-    catch {
+      self = Color(
+        red: components[0],
+        green: components[1],
+        blue: components[2],
+        opacity: components[3]
+      )
+    } catch {
       return nil
     }
   }
@@ -42,8 +47,7 @@ extension Color: RawRepresentable {
     do {
       let encodedComponents = try JSONEncoder().encode(doubleComponents)
       return String(data: encodedComponents, encoding: .utf8) ?? ""
-    }
-    catch {
+    } catch {
       return ""
     }
   }

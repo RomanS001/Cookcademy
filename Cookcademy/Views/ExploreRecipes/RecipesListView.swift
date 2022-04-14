@@ -10,65 +10,62 @@ import SwiftUI
 struct RecipesListView: View {
   @EnvironmentObject private var recipeData: RecipeData
   let viewStyle: ViewStyle
-  // let category: MainInformation.Category
 
-    @State private var isPresenting = false
-    @State private var newRecipe = Recipe()
+  @State private var isPresenting = false
+  @State private var newRecipe = Recipe()
 
-    @AppStorage("listBackgroundColor") private var listBackgroundColor = AppColor.background
-    private let listTextColor = AppColor.foreground
-    
-    var body: some View {
-        List {
-            ForEach(recipes) { recipe in
-                NavigationLink(recipe.mainInformation.name, destination: RecipeDetailView(recipe: binding(for: recipe) ))
-            }
-            .listRowBackground(listBackgroundColor)
-            .foregroundColor(listTextColor)
-        }
-        .navigationTitle(navigationTitle)
-        .toolbar(content: {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    newRecipe = Recipe()
-                  // newRecipe.mainInformation.category = recipes[0].mainInformation.category
-                  newRecipe.mainInformation.category = recipes.first?.mainInformation.category ?? .breakfast
-                    isPresenting = true
-                }, label: {
-                    Image(systemName: "plus")
-                })
-            }
+  @AppStorage("listBackgroundColor") private var listBackgroundColor = AppColor.background
+  private let listTextColor = AppColor.foreground
+
+  var body: some View {
+    List {
+      ForEach(recipes) { recipe in
+        NavigationLink(recipe.mainInformation.name, destination: RecipeDetailView(recipe: binding(for: recipe) ))
+      }
+      .listRowBackground(listBackgroundColor)
+      .foregroundColor(listTextColor)
+    }
+    .navigationTitle(navigationTitle)
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Button(action: {
+          newRecipe = Recipe()
+          newRecipe.mainInformation.category = recipes.first?.mainInformation.category ?? .breakfast
+            isPresenting = true
+        }, label: {
+            Image(systemName: "plus")
         })
-        .sheet(isPresented: $isPresenting, content: {
-            NavigationView {
-                ModifyRecipeView(recipe: $newRecipe)
-                    .toolbar(content: {
-                        ToolbarItem(placement: .cancellationAction) {
-                            Button("Dismiss") {
-                                isPresenting = false
-                            }
-                        }
-                      ToolbarItem(placement: .confirmationAction) {
-                        if newRecipe.isValid {
-                          Button("Add") {
-                            if case .favorites = viewStyle {
-                              newRecipe.isFavorite = true
-                            }
-                            recipeData.add(recipe: newRecipe)
-                              isPresenting = false
-                          }
-                        }
-                      }
-                    })
-                    .navigationTitle("Add a New Recipe")
+      }
+    }
+    .sheet(isPresented: $isPresenting, content: {
+      NavigationView {
+        ModifyRecipeView(recipe: $newRecipe)
+          .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+              Button("Dismiss") {
+                isPresenting = false
+              }
             }
-        })
+            ToolbarItem(placement: .confirmationAction) {
+              if newRecipe.isValid {
+                Button("Add") {
+                  if case .favorites = viewStyle {
+                    newRecipe.isFavorite = true
+                  }
+                  recipeData.add(recipe: newRecipe)
+                    isPresenting = false
+                }
+              }
+            }
+          }
+          .navigationTitle("Add a New Recipe")
+      }
+      })
     }
 }
 
 
 extension RecipesListView {
-
   enum ViewStyle {
     case favorites
     case singleCategory(MainInformation.Category)
@@ -106,7 +103,6 @@ extension RecipesListView {
     }
     return $recipeData.recipes[index]
   }
-
 }
 
 

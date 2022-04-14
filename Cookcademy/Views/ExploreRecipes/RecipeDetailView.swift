@@ -6,17 +6,17 @@
 //
 
 import SwiftUI
- 
+
 struct RecipeDetailView: View {
   @Binding var recipe: Recipe
 
-  @AppStorage("hideOptionalSteps") private var hideOptionalSteps: Bool = false
+  @AppStorage("hideOptionalSteps") private var hideOptionalSteps = false
   @AppStorage("listBackgroundColor") private var listBackgroundColor = AppColor.background
   @EnvironmentObject private var recipeData: RecipeData
   @State private var isPresenting = false
 
   private let listTextColor = AppColor.foreground
- 
+
   var body: some View {
     VStack {
       HStack {
@@ -31,7 +31,6 @@ struct RecipeDetailView: View {
           .padding()
         Spacer()
       }
-//      Spacer()
       List {
         Section(header: Text("Ingredients")) {
           ForEach(recipe.ingredients.indices, id: \.self) { index in
@@ -71,26 +70,26 @@ struct RecipeDetailView: View {
           }
         }
       }
-      }
-      .sheet(isPresented: $isPresenting) {
-        NavigationView {
-          ModifyRecipeView(recipe: $recipe)
-          .toolbar {
-            ToolbarItem(placement: .confirmationAction) {
-              Button("Save") {
-                isPresenting = false
-              }
+    }
+    .sheet(isPresented: $isPresenting) {
+      NavigationView {
+        ModifyRecipeView(recipe: $recipe)
+        .toolbar {
+          ToolbarItem(placement: .confirmationAction) {
+            Button("Save") {
+              isPresenting = false
             }
           }
-          .navigationTitle("Edit Recipe")
         }
-        .onDisappear() {
-          recipeData.saveRecipes()
-        }
+        .navigationTitle("Edit Recipe")
       }
+      .onDisappear() {
+        recipeData.saveRecipes()
+      }
+    }
   }
 }
- 
+
 struct RecipeDetailView_Previews: PreviewProvider {
   @State static var recipe = Recipe.testRecipes[0]
   static var previews: some View {

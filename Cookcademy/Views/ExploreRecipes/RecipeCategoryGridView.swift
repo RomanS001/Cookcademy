@@ -16,12 +16,11 @@ struct RecipeCategoryGridView: View {
     NavigationView {
       ScrollView {
         LazyVGrid(columns: columns, content: {
-          ForEach(MainInformation.Category.allCases,
-                  id: \.self) { category in
-            NavigationLink(destination: RecipesListView(viewStyle: .singleCategory(category)), label: {
-              CategoryView(category: category)
-            })
-          }
+          ForEach(MainInformation.Category.allCases, id: \.self) { category in
+            NavigationLink(
+              destination: RecipesListView(viewStyle: .singleCategory(category)),
+              label: { CategoryView(category: category) }
+            )}
         })
       }
       .navigationTitle("Categories")
@@ -32,7 +31,7 @@ struct RecipeCategoryGridView: View {
 
 struct CategoryView: View {
   let category: MainInformation.Category
- 
+
   var body: some View {
     ZStack {
       Image(category.rawValue)

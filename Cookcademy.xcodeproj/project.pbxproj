@@ -150,6 +150,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 47E5438827922332007B5BC2 /* Build configuration list for PBXNativeTarget "Cookcademy" */;
 			buildPhases = (
+				47B5E0722808396E0036B33A /* ShellScript */,
 				47E5437627922330007B5BC2 /* Sources */,
 				47E5437727922330007B5BC2 /* Frameworks */,
 				47E5437827922330007B5BC2 /* Resources */,
@@ -207,6 +208,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		47B5E0722808396E0036B33A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PATH=/opt/homebrew/bin:$PATH\nif [ -f ~/com.raywenderlich.swiftlint.yml ]; then\n  if which swiftlint >/dev/null; then\n    swiftlint --no-cache --config ~/com.raywenderlich.swiftlint.yml\n  fi\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		47E5437627922330007B5BC2 /* Sources */ = {
