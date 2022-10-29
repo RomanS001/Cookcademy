@@ -29,7 +29,6 @@ class RecipeData: ObservableObject {
     }
   }
 
-
   private var recipesFileURL: URL {
     do {
       let documentsDirectory = try FileManager.default.url(
@@ -48,7 +47,6 @@ class RecipeData: ObservableObject {
     recipes.filter { $0.isFavorite }
   }
 
-
   func recipes(for category: MainInformation.Category) -> [Recipe] {
     var filteredRecipes: [Recipe] = []
     for recipe in recipes where recipe.mainInformation.category == category {
@@ -65,10 +63,8 @@ class RecipeData: ObservableObject {
   }
 
   func index(of recipe: Recipe) -> Int? {
-    for i in recipes.indices {
-      if recipes[i].id == recipe.id {
-        return i
-      }
+    for oneIndex in recipes.indices where recipes[oneIndex].id == recipe.id {
+      return oneIndex
     }
     return nil
   }

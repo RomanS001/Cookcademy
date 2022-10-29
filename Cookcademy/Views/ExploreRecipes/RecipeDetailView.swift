@@ -83,7 +83,7 @@ struct RecipeDetailView: View {
         }
         .navigationTitle("Edit Recipe")
       }
-      .onDisappear() {
+      .onDisappear {
         recipeData.saveRecipes()
       }
     }

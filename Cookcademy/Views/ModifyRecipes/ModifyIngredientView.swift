@@ -19,7 +19,6 @@ struct ModifyIngredientView: ModifyComponentView {
     self.createAction = createAction
   }
 
-
   @Environment(\.presentationMode) private var mode
 
   var body: some View {

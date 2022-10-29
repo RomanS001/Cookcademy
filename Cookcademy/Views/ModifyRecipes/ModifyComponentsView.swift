@@ -22,12 +22,10 @@ extension RecipeComponent {
   }
 }
 
-
 protocol ModifyComponentView: View {
   associatedtype Component
   init(component: Binding<Component>, createAction: @escaping (Component) -> Void)
 }
-
 
 struct ModifyComponentsView<Component: RecipeComponent, DestinationView: ModifyComponentView>: View where DestinationView.Component == Component {
   @Binding var components: [Component]
@@ -85,7 +83,6 @@ struct ModifyComponentsView<Component: RecipeComponent, DestinationView: ModifyC
     }
   }
 }
-
 
 struct ModifyIngredientsView_Previews: PreviewProvider {
   @State static var recipe = Recipe.testRecipes[1]

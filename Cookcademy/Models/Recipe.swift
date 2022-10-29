@@ -23,7 +23,7 @@ struct Recipe: Identifiable, Codable {
     )
   }
 
-  init(mainInformation: MainInformation, ingredients: [Ingredient], directions:[Direction]) {
+  init(mainInformation: MainInformation, ingredients: [Ingredient], directions: [Direction]) {
     self.mainInformation = mainInformation
     self.ingredients = ingredients
     self.directions = directions
@@ -88,7 +88,6 @@ init() {
   self.init(name: "", quantity: 1.0, unit: .none)
 }
 
-
   enum Unit: String, CaseIterable, Codable {
     case ounces = "Ounces"
     case grams = "Grams"
@@ -114,7 +113,6 @@ struct Direction: RecipeComponent {
       self.init(description: "", isOptional: false)
     }
 }
-
 
 extension Recipe {
   static let testRecipes: [Recipe] = [

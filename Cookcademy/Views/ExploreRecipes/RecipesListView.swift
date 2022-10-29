@@ -64,7 +64,6 @@ struct RecipesListView: View {
     }
 }
 
-
 extension RecipesListView {
   enum ViewStyle {
     case favorites
@@ -104,7 +103,6 @@ extension RecipesListView {
     return $recipeData.recipes[index]
   }
 }
-
 
 struct RecipesListView_Previews: PreviewProvider {
   static var previews: some View {

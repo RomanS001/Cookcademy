@@ -9,9 +9,8 @@ import SwiftUI
 
 struct ModifyMainInformationView: View {
   @AppStorage("listBackgroundColor") private var listBackgroundColor = AppColor.background
-  private let listTextColor = AppColor.foreground
-  
   @Binding var mainInformation: MainInformation
+  private let listTextColor = AppColor.foreground
 
   var body: some View {
     Form {
