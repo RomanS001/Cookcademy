@@ -15,7 +15,6 @@
 		47839F1227945B96005148D1 /* ModifyRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47839F1127945B96005148D1 /* ModifyRecipeView.swift */; };
 		478D42FC290DA5CB004DE640 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 478D42FB290DA5CB004DE640 /* .gitignore */; };
 		4794BE7627FA493D006D6D4A /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4794BE7527FA493D006D6D4A /* MainTabView.swift */; };
-		47C152AB290DA36A0083EAF1 /* swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 47C152AA290DA36A0083EAF1 /* swiftlint.yml */; };
 		47D529422792D1D5009779F8 /* RecipeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D529412792D1D5009779F8 /* RecipeData.swift */; };
 		47D529442792DA3F009779F8 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D529432792DA3E009779F8 /* RecipeDetailView.swift */; };
 		47D529462792ED4F009779F8 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D529452792ED4F009779F8 /* AppColor.swift */; };
@@ -36,7 +35,6 @@
 		47839F1127945B96005148D1 /* ModifyRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyRecipeView.swift; sourceTree = "<group>"; };
 		478D42FB290DA5CB004DE640 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		4794BE7527FA493D006D6D4A /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
-		47C152AA290DA36A0083EAF1 /* swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftlint.yml; sourceTree = "<group>"; };
 		47D529412792D1D5009779F8 /* RecipeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeData.swift; sourceTree = "<group>"; };
 		47D529432792DA3E009779F8 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
 		47D529452792ED4F009779F8 /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
@@ -114,7 +112,6 @@
 			isa = PBXGroup;
 			children = (
 				478D42FB290DA5CB004DE640 /* .gitignore */,
-				47C152AA290DA36A0083EAF1 /* swiftlint.yml */,
 				47E5437C27922330007B5BC2 /* Cookcademy */,
 				47E5437B27922330007B5BC2 /* Products */,
 			);
@@ -156,7 +153,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 47E5438827922332007B5BC2 /* Build configuration list for PBXNativeTarget "Cookcademy" */;
 			buildPhases = (
-				47B5E0722808396E0036B33A /* ShellScript */,
 				47E5437627922330007B5BC2 /* Sources */,
 				47E5437727922330007B5BC2 /* Frameworks */,
 				47E5437827922330007B5BC2 /* Resources */,
@@ -166,6 +162,8 @@
 			dependencies = (
 			);
 			name = Cookcademy;
+			packageProductDependencies = (
+			);
 			productName = Cookcademy;
 			productReference = 47E5437A27922330007B5BC2 /* Cookcademy.app */;
 			productType = "com.apple.product-type.application";
@@ -194,6 +192,8 @@
 				Base,
 			);
 			mainGroup = 47E5437127922330007B5BC2;
+			packageReferences = (
+			);
 			productRefGroup = 47E5437B27922330007B5BC2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -210,32 +210,11 @@
 			files = (
 				478D42FC290DA5CB004DE640 /* .gitignore in Resources */,
 				47E5438527922332007B5BC2 /* Preview Assets.xcassets in Resources */,
-				47C152AB290DA36A0083EAF1 /* swiftlint.yml in Resources */,
 				47E5438227922332007B5BC2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		47B5E0722808396E0036B33A /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		47E5437627922330007B5BC2 /* Sources */ = {
